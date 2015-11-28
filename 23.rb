@@ -30,10 +30,12 @@ hola = []
 
 hola = hola.sort.uniq.select {|x| x < 28123}
 
-final_arr=[]
-(1..28123).each do |x|
-  final_arr << x unless hola[0,x].include?(x)
-end
+p divisors(18)
 
-p final_arr.reduce(:+)
+#final_arr=[]
+#(1..28123).each do |x|
+#  final_arr << x unless hola[0,x].include?(x)
+#end
+
+#p final_arr.reduce(:+)
 
