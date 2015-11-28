@@ -1,10 +1,12 @@
 def divisors(x)
   arr=Array.new
-  (1..(x/2)).each do |number|
+  (1..(x**0.5)).each do |number|
     arr << number if x%number==0
+    arr << x/number if x%number==0 unless x / number == x
   end
-  arr
+  arr.sort.uniq
 end
+
 
 def perfect?(x)
   return false if x != divisors(x).reduce(:+)
@@ -16,15 +18,22 @@ def abundant?(x)
   return false
 end
 
-abundant_arr = (12..1000).select {|x| abundant?(x)}
+abundant_arr = (12..28123).select {|x| abundant?(x)}
 
-def sum_of_two_abundant?(x, arr)
-   arr.each do |y|
-     arr.each do |z|
-       return true if x == y+z
+hola = []
+
+   abundant_arr.each do |y|
+     abundant_arr.each do |z|
+       hola << y+z
      end 
    end
-  return false
+
+hola = hola.sort.uniq.select {|x| x < 28123}
+
+final_arr=[]
+(1..28123).each do |x|
+  final_arr << x unless hola[0,x].include?(x)
 end
 
-p (1..28123).select {|x| !sum_of_two_abundant?(x, abundant_arr)}.reduce(:+) 
+p final_arr.reduce(:+)
+
